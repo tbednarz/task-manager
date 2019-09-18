@@ -1,6 +1,9 @@
+// THIS FILE CREATES EXPRESS APP AND RUNS ON SERVER
+
 const express = require('express')
 const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
+
 //load server
 require('./db/mongoose')
 
@@ -20,3 +23,14 @@ app.use(taskRouter)
 app.listen(port, () => {
     console.log('server running on port: ' + port)
 })
+
+const jwt = require('jsonwebtoken')
+const myFunction = async () => {
+  const token =  jwt.sign({_id: 'abc123' }, 'thisisapotato', {expiresIn: '7 days'})
+
+  const tokenCheck = jwt.verify(token, 'thisisapotato')
+    console.log(tokenCheck)
+}
+
+myFunction()
+
