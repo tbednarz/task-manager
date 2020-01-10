@@ -11,6 +11,34 @@ require("./db/mongoose");
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+//crud routers
+app.use(userRouter);
+app.use(taskRouter);
+
+app.listen(port, () => {
+  console.log("server running on port: " + port);
+});
+
+// const Task = require("./models/task");
+// const User = require("./models/user");
+// const main = async () => {
+//   // const task = await Task.findById("5e18c0b099802b2d808ccf78");
+//   // await task.populate("owner").execPopulate();
+//   // console.log(task.owner);
+//   const user = await User.findById("5e18bfb374218c2884f62ae6");
+//   await user.populate("tasks").execPopulate();
+//   console.log(user.tasks);
+// };
+// main();
+
+// const pet = {
+//   name: "Dennis"
+// };
+// pet.toJSON = function() {
+//   return {};
+// };
+// console.log(JSON.stringify(pet));
 //REGISTER MIDDLEWARE
 //example, if method called is a GET request log message
 // app.use((req, res, next) => {
@@ -26,11 +54,6 @@ const port = process.env.PORT || 3000;
 // });
 
 //parse to json
-app.use(express.json());
-//crud routers
-app.use(userRouter);
-app.use(taskRouter);
-
 //EXPRESS MIDDLEWARE
 //
 //Without middleware: new request-> run route handler
@@ -42,9 +65,6 @@ app.use(taskRouter);
 //every express route does not need middleware
 
 //server listening
-app.listen(port, () => {
-  console.log("server running on port: " + port);
-});
 
 // const jwt = require("jsonwebtoken");
 // const myFunction = async () => {
